@@ -39,10 +39,13 @@ export function Contact() {
                 your board on the bench. Same-day waxing available.
               </p>
               <a
-                href="mailto:matlockstuneshop@gmail.com"
+                href="https://ig.me/matlockstuneshop"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group mt-8 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-black transition-transform hover:scale-105"
               >
-                Email Kyle
+                <InstagramIcon className="h-4 w-4" />
+                DM Kyle
                 <ArrowIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
