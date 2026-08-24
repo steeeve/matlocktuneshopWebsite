@@ -23,7 +23,7 @@ const services: Service[] = [
   {
     title: "Same-Day Waxing",
     description:
-      "Hot wax tuned to current snow conditions so your base glides clean all day. Drop it off, ride it out.",
+      "Hot wax tuned to current snow conditions so your base glides clean all day. Drop it off, pick it up the same day.",
     tag: "Speed",
     images: [
       "/services/waxing.png",
