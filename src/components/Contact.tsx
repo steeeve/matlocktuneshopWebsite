@@ -57,22 +57,22 @@ export function Contact() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-between rounded-2xl border border-white/10 bg-background p-5 transition-colors hover:border-white/30 hover:bg-white/[0.03]"
+                    className="group flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-background p-5 transition-colors hover:border-white/30 hover:bg-white/[0.03]"
                   >
-                    <span className="flex items-center gap-4">
-                      <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/80 transition-colors group-hover:text-white">
+                    <span className="flex min-w-0 items-center gap-4">
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 text-white/80 transition-colors group-hover:text-white">
                         <Icon className="h-5 w-5" />
                       </span>
-                      <span>
+                      <span className="min-w-0">
                         <span className="block text-xs font-semibold uppercase tracking-widest text-white/40">
                           {label}
                         </span>
-                        <span className="block text-base font-semibold">
+                        <span className="block break-all text-base font-semibold">
                           {handle}
                         </span>
                       </span>
                     </span>
-                    <ArrowIcon className="h-5 w-5 text-white/40 transition-all group-hover:translate-x-1 group-hover:text-white" />
+                    <ArrowIcon className="h-5 w-5 shrink-0 text-white/40 transition-all group-hover:translate-x-1 group-hover:text-white" />
                   </a>
                 </li>
               ))}

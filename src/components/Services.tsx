@@ -43,28 +43,45 @@ const GALLERY_INTERVAL = 3000;
 
 function ServiceRow({ service }: { service: Service }) {
   const [hovered, setHovered] = useState(false);
+  const [tapped, setTapped] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
   const [active, setActive] = useState(0);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
   const { images, title, description, tag } = service;
   const hasImages = images.length > 0;
+  const expanded = isTouch ? tapped : hovered;
 
   useEffect(() => {
-    if (!hovered || images.length <= 1) return;
+    setIsTouch(
+      typeof window !== "undefined" &&
+        window.matchMedia("(hover: none)").matches
+    );
+  }, []);
+
+  useEffect(() => {
+    if (!expanded || images.length <= 1) return;
     timer.current = setInterval(() => {
       setActive((i) => (i + 1) % images.length);
     }, GALLERY_INTERVAL);
     return () => {
       if (timer.current) clearInterval(timer.current);
     };
-  }, [hovered, images.length]);
+  }, [expanded, images.length]);
 
   return (
     <div
       className="group relative bg-background p-8 transition-colors hover:bg-white/[0.03] sm:p-10"
-      onMouseEnter={() => setHovered(true)}
+      onMouseEnter={() => {
+        if (!isTouch) setHovered(true);
+      }}
       onMouseLeave={() => {
-        setHovered(false);
-        setActive(0);
+        if (!isTouch) {
+          setHovered(false);
+          setActive(0);
+        }
+      }}
+      onClick={() => {
+        if (isTouch && hasImages) setTapped((t) => !t);
       }}
     >
       <div className="flex items-start justify-between gap-6">
@@ -84,7 +101,7 @@ function ServiceRow({ service }: { service: Service }) {
       {hasImages ? (
         <div
           className={`grid transition-all duration-500 ease-out ${
-            hovered
+            expanded
               ? "mt-8 grid-rows-[1fr] opacity-100"
               : "grid-rows-[0fr] opacity-0"
           }`}
@@ -125,7 +142,10 @@ function ServiceRow({ service }: { service: Service }) {
                     key={src}
                     src={src}
                     alt={`Thumbnail ${i + 1}`}
-                    onClick={() => setActive(i)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActive(i);
+                    }}
                     aria-label={`View image ${i + 1}`}
                     className={`h-14 w-auto cursor-pointer rounded-lg object-contain transition-all duration-300 ${
                       i === active
@@ -141,7 +161,7 @@ function ServiceRow({ service }: { service: Service }) {
       ) : (
         <div
           className={`grid transition-all duration-500 ease-out ${
-            hovered
+            expanded
               ? "mt-8 grid-rows-[1fr] opacity-100"
               : "grid-rows-[0fr] opacity-0"
           }`}
@@ -163,10 +183,17 @@ function ServiceRow({ service }: { service: Service }) {
         </div>
       )}
 
-      {!hovered && (
+      {!expanded && (
         <div className="mt-6">
           <span className="text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-white/25 transition-colors group-hover:text-white/40">
-            {hasImages ? "Hover to expand gallery" : "Photos coming soon"}
+            {hasImages ? (
+              <>
+                <span className="sm:hidden">Tap to expand gallery</span>
+                <span className="hidden sm:inline">Hover to expand gallery</span>
+              </>
+            ) : (
+              "Photos coming soon"
+            )}
           </span>
         </div>
       )}
