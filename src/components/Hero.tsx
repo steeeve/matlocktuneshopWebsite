@@ -15,7 +15,7 @@ export function Hero() {
         }}
       />
       {/* Mountain backdrop */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] text-white/10">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] translate-y-15 text-white/10">
         <MountainRange className="h-full w-full" />
       </div>
 
