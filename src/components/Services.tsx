@@ -107,17 +107,15 @@ function ServiceRow({ service }: { service: Service }) {
           }`}
         >
           <div className="overflow-hidden">
-            <div className="relative mx-auto w-fit max-w-full rounded-xl border border-white/10 bg-white/[0.02] p-1">
+            <div className="relative mx-auto h-[240px] w-full max-w-md overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] sm:h-[300px]">
               {images.map((src, i) => (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   key={src}
                   src={src}
                   alt={`${title} example ${i + 1}`}
-                  className={`max-h-[240px] w-auto max-w-full object-contain transition-opacity duration-500 sm:max-h-[300px] ${
-                    i === active
-                      ? "relative block opacity-100"
-                      : "absolute inset-0 h-full w-full opacity-0"
+                  className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-500 ${
+                    i === active ? "opacity-100" : "opacity-0"
                   }`}
                 />
               ))}

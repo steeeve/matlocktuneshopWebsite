@@ -39,7 +39,7 @@ export function Contact() {
                 your board on the bench. Same-day waxing available.
               </p>
               <a
-                href="https://ig.me/matlockstuneshop"
+                href="https://ig.me/m/matlockstuneshop"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group mt-8 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-black transition-transform hover:scale-105"
